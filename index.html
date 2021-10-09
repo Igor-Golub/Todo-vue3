@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="theme.css">
+  <title>Vue3 todo</title>
+</head>
+<body>
+
+<div id="root" class="container">
+  <div class="card">
+    <h2>{{ title }}</h2>
+    <div class="form-control">
+      <input
+          type="text"
+          :value='inputValue'
+          :placeholder='placeholderMessage'
+          @input='inputChangeHandler'
+          @keypress.enter='addTodo'
+      />
+    </div>
+    <button class="btn" @click='addTodo'>Add todo</button>
+    <hr>
+    <ul class="list" v-if='todos.length !== 0'>
+      <li class="list-item" v-for="(todo, idx) in todos">
+        ({{ idx + 1 }}) {{ todo }}
+        <button class="btn danger" @click='removeTodo(idx)'>
+          Delete
+        </button>
+      </li>
+      <hr>
+      <li>
+        <div style='display: flex; justify-content: space-between'>
+          <strong>Amount todos: {{ todos.length }}</strong>
+          <button class="btn danger" @click='removeAll'>Delete all</button>
+        </div>
+      </li>
+    </ul>
+    <div v-else>{{ emptyListMessage }}</div>
+  </div>
+</div>
+
+<script src="https://unpkg.com/vue@next"></script>
+<script src="app.js"></script>
+</body>
+</html>
