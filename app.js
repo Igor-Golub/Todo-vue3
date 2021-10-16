@@ -9,9 +9,6 @@ const App = {
     }
   },
   methods: {
-    inputChangeHandler(event) {
-      this.inputValue = event.target.value
-    },
     addTodo() {
       if (this.inputValue !== '') {
         this.todos.push(this.inputValue)
@@ -25,6 +22,16 @@ const App = {
       this.todos = []
     },
   },
+  computed: {
+
+  },
+  watch: {
+    inputValue(value) {
+      if (value.length > 10) {
+        this.inputValue = ''
+      }
+    }
+  }
 }
 
 const app = Vue.createApp(App).mount('#root')

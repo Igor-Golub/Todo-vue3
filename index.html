@@ -9,13 +9,13 @@
 
 <div id="root" class="container">
   <div class="card">
-    <h2>{{ title }}</h2>
+    <h2 :style="{ color: inputValue.length < 5 ? 'darkRed' : 'darkBlue' }">{{ title }}</h2>
     <div class="form-control">
       <input
           type="text"
           :value='inputValue'
           :placeholder='placeholderMessage'
-          @input='inputChangeHandler'
+          v-model='inputValue'
           @keypress.enter='addTodo'
       />
     </div>
@@ -23,7 +23,9 @@
     <hr>
     <ul class="list" v-if='todos.length !== 0'>
       <li class="list-item" v-for="(todo, idx) in todos">
-        ({{ idx + 1 }}) {{ todo }}
+<!--        <span :class="todo.length > 5 ? null : 'bold'">({{ idx + 1 }}) {{ todo }}</span>-->
+<!--        <span :class="{'primary': true}">({{ idx + 1 }}) {{ todo }}</span>-->
+        <span :class="['bold', { 'primary' : todo.length > 5 }]">({{ idx + 1 }}) {{ todo }}</span>
         <button class="btn danger" @click='removeTodo(idx)'>
           Delete
         </button>
